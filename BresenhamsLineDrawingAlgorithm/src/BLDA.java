@@ -63,6 +63,7 @@ public class BLDA extends JFrame implements ActionListener {
         int Y1=Integer.parseInt(y1.getText());
         int dx=X1-X0;
         int dy=Y1-Y0;
+        int f=1;
         int pk,xx,yy;
         if(dy<dx){
             pk=2*dy-dx;
@@ -74,6 +75,10 @@ public class BLDA extends JFrame implements ActionListener {
             pk=2*dx-dy;
             yy=X0;
             xx=Y0;
+            dx=dx+dy;
+            dy=dx-dy;
+            dx=dx-dy;
+            f=0;
             model.addRow(new Object[]{pk,"","("+yy+", "+xx+")"});
             X1=Y1;
         }
@@ -92,7 +97,7 @@ public class BLDA extends JFrame implements ActionListener {
             else{
                 pk+=(2*dy);
             }
-            if(dy<dx){
+            if(f==1){
                 drawPanel.getGraphics().drawLine(xTemp*10+500,218-yTemp*10,xx*10+500,218-yy*10);
                 model.addRow(new Object[]{pkTemp, pk, "("+xx+", "+yy+")"});
             }
