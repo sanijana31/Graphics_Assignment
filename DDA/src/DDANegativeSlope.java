@@ -1,15 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.lang.*;
 import static java.awt.BorderLayout.*;
-import javax.swing.*;
 import javax.swing.table.*;
 
-public class DDA extends JFrame implements ActionListener {
+public class DDANegativeSlope extends JFrame implements ActionListener {
     JTextField x0=new JTextField(5);
     JTextField y0=new JTextField(5);
     JTextField x1=new JTextField(5);
@@ -17,9 +14,9 @@ public class DDA extends JFrame implements ActionListener {
     JPanel drawPanel=new JPanel();
     JPanel tablePanel=new JPanel();
     DefaultTableModel model;
-    public DDA() {
+    public DDANegativeSlope() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1100,510);
+        setSize(1366,510);
         setTitle("DDA Algo Implement");
         Initialization();
     }
@@ -39,7 +36,7 @@ public class DDA extends JFrame implements ActionListener {
         JButton draw = new JButton("DRAW");
         JButton clear = new JButton("CLEAR");
         topPanel.add(draw);
-        topPanel.add(clear,EAST);
+        topPanel.add(clear);
         draw.addActionListener(this);
         clear.addActionListener(this);
         add(topPanel, NORTH);
@@ -49,9 +46,11 @@ public class DDA extends JFrame implements ActionListener {
         renderer.setHorizontalAlignment( SwingConstants.CENTER );
         table.setModel(model);
         model.addColumn("Point(x,y)");
+        model.addColumn("Plot(x,y)");
         tablePanel.add(new JScrollPane(table));
-        tablePanel.setPreferredSize(new Dimension(100, 510));
+        tablePanel.setPreferredSize(new Dimension(454, 510));
         add(tablePanel, WEST);
+        drawPanel.setPreferredSize(new Dimension(300, 510));
         add(drawPanel);
     }
     public void DDAAlgorithm(){
@@ -62,23 +61,27 @@ public class DDA extends JFrame implements ActionListener {
         double Y1=Double.parseDouble(y1.getText());
         double dx=X1-X0;
         double dy=Y1-Y0;
-        stapes= (int) ((Math.abs(dx) > Math.abs(dy)) ? Math.abs(dx) : Math.abs(dy));
-        double xincrement=dx/stapes;
-        double yincrement=dy/stapes;
-        double xx=X0;
-        double yy=Y0;
-        drawPanel.getGraphics().drawLine(500,0, 500, 500);
-        drawPanel.getGraphics().drawLine(0,218, 1000, 218);
-        model.addRow(new Object[]{"("+xx+", "+yy+")"});
-        for(int i=0;i<stapes;i++){
-            double xTemp=xx;
-            double yTemp=yy;
-            xx+=xincrement;
-            yy+=yincrement;
-            drawPanel.getGraphics().drawLine(((int)(Math.round(xTemp))*10)+500,218-((int)(Math.round(yTemp))*10),((int)(Math.round(xx))*10)+500,218-((int)(Math.round(yy))*10));
-            model.addRow(new Object[]{"("+String.format("%.1f",xx)+", "+String.format("%.1f",yy)+")"});
+        stapes = (int) ((Math.abs(dx) >= Math.abs(dy)) ? Math.abs(dx) : Math.abs(dy));
+        if(Math.abs(dx)>=Math.abs(dy)||Math.abs(dx)==0){
+            double xincrement=dx/stapes;
+            double yincrement=dy/stapes;
+            double xx=X0;
+            double yy=Y0;
+            drawPanel.getGraphics().drawLine(500,0, 500, 500);
+            drawPanel.getGraphics().drawLine(0,218, 894, 218);
+            model.addRow(new Object[]{"("+xx+", "+yy+")","("+(int)Math.round(xx)+", "+(int)Math.round(yy)+")"});
+            for(int i=0;i<stapes;i++){
+                double xTemp=xx;
+                double yTemp=yy;
+                xx+=xincrement;
+                yy+=yincrement;
+                drawPanel.getGraphics().drawLine(((int)(Math.round(xTemp))*10)+500,218-((int)(Math.round(yTemp))*10),((int)(Math.round(xx))*10)+500,218-((int)(Math.round(yy))*10));
+                model.addRow(new Object[]{"("+String.format("%.1f",xx)+", "+String.format("%.1f",yy)+")","("+(int)Math.round(xx)+", "+(int)Math.round(yy)+")"});
+            }
         }
-        String[] header = {"Point(x,y)"};
+        else {
+            drawPanel.getGraphics().drawString("Slope is positive please another combination",350,218);
+        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -95,7 +98,8 @@ public class DDA extends JFrame implements ActionListener {
         }
     }
     public static void main(String[]args){
-        DDA obj=new DDA();
+        DDANegativeSlope obj=new DDANegativeSlope();
         obj.setVisible(true);
     }
 }
+
