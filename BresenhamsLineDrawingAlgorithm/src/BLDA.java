@@ -98,11 +98,11 @@ public class BLDA extends JFrame implements ActionListener {
                 pk+=(2*dy);
             }
             if(f==1){
-                drawPanel.getGraphics().drawLine(xTemp*10+500,218-yTemp*10,xx*10+500,218-yy*10);
+                drawPanel.getGraphics().drawLine(xTemp+500,218-yTemp,xx+500,218-yy);
                 model.addRow(new Object[]{pkTemp, pk, "("+xx+", "+yy+")"});
             }
             else{
-                drawPanel.getGraphics().drawLine(yTemp*10+500,218-xTemp*10,yy*10+500,218-xx*10);
+                drawPanel.getGraphics().drawLine(yTemp+500,218-xTemp,yy+500,218-xx);
                 model.addRow(new Object[]{pkTemp, pk, "("+yy+", "+xx+")"});
             }
         }while(xx<X1);

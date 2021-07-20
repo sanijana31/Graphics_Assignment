@@ -74,7 +74,7 @@ public class DDAPositiveSlope extends JFrame implements ActionListener {
                 double yTemp=yy;
                 xx+=xincrement;
                 yy+=yincrement;
-                drawPanel.getGraphics().drawLine(((int)(Math.round(xTemp))*10)+500,218-((int)(Math.round(yTemp))*10),((int)(Math.round(xx))*10)+500,218-((int)(Math.round(yy))*10));
+                drawPanel.getGraphics().drawLine(((int)(Math.round(xTemp)))+500,218-((int)(Math.round(yTemp))),((int)(Math.round(xx)))+500,218-((int)(Math.round(yy))));
                 model.addRow(new Object[]{"("+String.format("%.1f",xx)+", "+String.format("%.1f",yy)+")","("+(int)Math.round(xx)+", "+(int)Math.round(yy)+")"});
             }
         }

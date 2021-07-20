@@ -12,6 +12,7 @@ public class DirectLineEquation extends JFrame implements ActionListener {
     JTextField y1=new JTextField(5);
     JPanel drawPanel=new JPanel();
     JPanel tablePanel=new JPanel();
+    JPanel topPanel=new JPanel();
     DefaultTableModel model;
     public DirectLineEquation() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,7 +22,6 @@ public class DirectLineEquation extends JFrame implements ActionListener {
     }
 
     public void Initialization(){
-        JPanel topPanel=new JPanel();
         topPanel.add(new JLabel("x0"));
         topPanel.add(x0);
         topPanel.add(new JLabel("y0"));
@@ -72,10 +72,10 @@ public class DirectLineEquation extends JFrame implements ActionListener {
             double yTemp=yy;
             xx+=d;
             yy=m*xx+c;
-            drawPanel.getGraphics().drawLine((int)Math.round(xTemp)*10+500,218-(int)Math.round(yTemp)*10,(int)Math.round(xx)*10+500, 218 -(int)(Math.round(yy) * 10));
+            drawPanel.getGraphics().drawLine((int)Math.round(xTemp)+500,218-(int)Math.round(yTemp),(int)Math.round(xx)+500, 218 -(int)(Math.round(yy)));
             model.addRow(new Object[]{"("+String.format("%.1f",xx)+", "+String.format("%.1f",yy)+")"});
         }
-        drawPanel.getGraphics().drawLine((int)Math.round(xx)*10+500,218-(int)Math.round(yy)*10,(int)Math.round(X1)*10+500, 218 -(int)(Math.round(Y1) * 10));
+        drawPanel.getGraphics().drawLine((int)Math.round(xx)+500,218-(int)Math.round(yy),(int)Math.round(X1)+500, 218 -(int)(Math.round(Y1)));
         if(xx!=X1){
             model.addRow(new Object[]{"("+String.format("%.1f",X1)+", "+String.format("%.1f",Y1)+")"});
         }
