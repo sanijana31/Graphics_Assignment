@@ -44,24 +44,17 @@ int main(){
 	point[1][0]=y1;
 	point[1][1]=y2;
 	point[1][2]=y3;
-	/*float point1[2][3];
-	point1[0][0]=x1;
-	point1[0][1]=x2;
-	point1[0][2]=x3;
-	point1[1][0]=y1;
-	point1[1][1]=y2;
-	point1[1][2]=y3;*/
 	float result1[2][3];
 	Mul(r,point,result1,2,2,3);
 	Translation(point,tx,ty,3);
 	float result[2][3];
 	Mul(r,point,result,2,2,3);
 	Translation(result1,tx,ty,3);
-	cout<<"rotation before translation\n";
+	cout<<"rotation after translation\n";
 	for(int i=0;i<3;i++){
 		cout<<"("<<result[0][i]<<","<<result[1][i]<<")\n";
 	}
-	cout<<"rotation after translation\n";
+	cout<<"rotation before translation\n";
 	for(int i=0;i<3;i++){
 		cout<<"("<<result1[0][i]<<","<<result[1][i]<<")\n";
 	}
